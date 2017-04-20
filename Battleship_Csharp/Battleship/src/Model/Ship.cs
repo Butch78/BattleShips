@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using SwinGameSDK;
+using System.Diagnostics;
 /// <summary>
 /// The SeaGridAdapter allows for the change in a sea grid view. Whenever a ship is
 /// presented it changes the view into a sea tile instead of a ship tile.
@@ -96,7 +98,8 @@ namespace Battleship
 
             //gets the ship size from the enumarator
             /*******/
-            _sizeOfShip = _shipName.CompareTo(ship);
+			_sizeOfShip = (int)_shipName;
+           // _sizeOfShip = _shipName.CompareTo(ship);
         }
 
         /// <summary>
@@ -122,7 +125,7 @@ namespace Battleship
 
         public void Hit()
         {
-            _hitsTaken++;
+            _hitsTaken ++;
         }
 
         /// <summary>
