@@ -138,14 +138,10 @@ namespace Battleship
 
                 s = _Scores[i];
 
-                //for scores 1 - 9 use 01 - 09
+                //for scores 1 - 10
                 if (i < 10)
                 {
                     SwinGame.DrawText(" " + System.Convert.ToString(i + 1) + ":   " + s.Name + "   " + System.Convert.ToString(s.Value), Color.White, GameResources.GameFont("HighScore"), SCORES_LEFT, SCORES_TOP + i * SCORE_GAP);
-                }
-                else
-                {
-                    SwinGame.DrawText(i + 1 + ":   " + s.Name + "   " + System.Convert.ToString(s.Value), Color.White, GameResources.GameFont("Courier"), SCORES_LEFT, SCORES_TOP + i * SCORE_GAP);
                 }
             }
         }
