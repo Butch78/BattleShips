@@ -13,7 +13,7 @@ namespace Battleship
     sealed class HighScoreController
     {
         private const int NAME_WIDTH = 3;
-        private const int SCORES_LEFT = 490;
+        private const int SCORES_LEFT = 510;
 
         /// <summary>
         /// The score structure is used to keep the name and
@@ -128,7 +128,7 @@ namespace Battleship
                 LoadScores();
             }
 
-            SwinGame.DrawText("   High Scores   ", Color.White, GameResources.GameFont("Courier"), SCORES_LEFT, SCORES_HEADING);
+            SwinGame.DrawText("   High Scores   ", Color.White, GameResources.GameFont("HighScore"), SCORES_LEFT, SCORES_HEADING);
 
             //For all of the scores
             int i = 0;
@@ -139,9 +139,9 @@ namespace Battleship
                 s = _Scores[i];
 
                 //for scores 1 - 9 use 01 - 09
-                if (i < 9)
+                if (i < 10)
                 {
-                    SwinGame.DrawText(" " + System.Convert.ToString(i + 1) + ":   " + s.Name + "   " + System.Convert.ToString(s.Value), Color.White, GameResources.GameFont("Courier"), SCORES_LEFT, SCORES_TOP + i * SCORE_GAP);
+                    SwinGame.DrawText(" " + System.Convert.ToString(i + 1) + ":   " + s.Name + "   " + System.Convert.ToString(s.Value), Color.White, GameResources.GameFont("HighScore"), SCORES_LEFT, SCORES_TOP + i * SCORE_GAP);
                 }
                 else
                 {

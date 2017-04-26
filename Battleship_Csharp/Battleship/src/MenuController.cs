@@ -26,7 +26,7 @@ namespace Battleship
         private const int MENU_TOP = 575;
         private const int MENU_LEFT = 30;
         private const int MENU_GAP = 0;
-        private const int BUTTON_WIDTH = 120;
+        private const int BUTTON_WIDTH = 130;
         private const int BUTTON_HEIGHT = 25;
         private const int BUTTON_SEP = BUTTON_WIDTH + MENU_GAP;
         private const int TEXT_OFFSET = 0;
