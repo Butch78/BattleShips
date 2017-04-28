@@ -16,3 +16,9 @@ C:\Users\Matthew\OneDrive\Development Project 1 SWE\BattleShips\Battleship_Cshar
 C:\Users\Matthew\OneDrive\Development Project 1 SWE\BattleShips\Battleship_Csharp\Battleship\obj\Debug\Battleship.csprojResolveAssemblyReference.cache
 C:\Users\Matthew\OneDrive\Development Project 1 SWE\BattleShips\Battleship_Csharp\Battleship\obj\Debug\Battleship.exe
 C:\Users\Matthew\OneDrive\Development Project 1 SWE\BattleShips\Battleship_Csharp\Battleship\obj\Debug\Battleship.pdb
+E:\BattleShips\Battleship_Csharp\Battleship\bin\Debug\Battleship.exe.config
+E:\BattleShips\Battleship_Csharp\Battleship\bin\Debug\Battleship.exe
+E:\BattleShips\Battleship_Csharp\Battleship\bin\Debug\Battleship.pdb
+E:\BattleShips\Battleship_Csharp\Battleship\obj\Debug\Battleship.csprojResolveAssemblyReference.cache
+E:\BattleShips\Battleship_Csharp\Battleship\obj\Debug\Battleship.exe
+E:\BattleShips\Battleship_Csharp\Battleship\obj\Debug\Battleship.pdb

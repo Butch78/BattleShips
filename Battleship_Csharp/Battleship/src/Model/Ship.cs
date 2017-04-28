@@ -16,6 +16,7 @@ namespace Battleship
         private int _row;
         private int _col;
         private Direction _direction;
+        private bool _selected;
 
         /// <summary>
         /// The type of ship
@@ -145,6 +146,19 @@ namespace Battleship
             get
             {
                 return Hits == Size;
+            }
+        }
+
+        public bool Selected
+        {
+            get
+            {
+                return _selected;
+            }
+
+            set
+            {
+                _selected = value;
             }
         }
 

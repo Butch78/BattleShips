@@ -88,7 +88,15 @@ namespace Battleship
                 return true;
             }
         }
+        public Dictionary<ShipName, Ship> Ships
+        {
+            get
+            {
+                return _Ships;
+            }
 
+
+        }
         /// <summary>
         /// SeaGrid constructor, a seagrid has a number of tiles stored in an array
         /// </summary>
@@ -158,7 +166,7 @@ namespace Battleship
                 {
                     if (currentRow < 0 | currentRow >= Width | currentCol < 0 | currentCol >= Height)
                     {
-                        throw (new InvalidOperationException("Ship can't fit on the board"));
+                        throw (new InvalidOperationException("Ship can't fit on the board if further moved"));
                     }
 
                     _GameTiles[currentRow, currentCol].Ship = newShip;
@@ -171,8 +179,8 @@ namespace Battleship
             }
             catch (Exception e)
             {
-                newShip.Remove(); //if fails remove the ship
-                throw (new ApplicationException(e.Message));
+               // newShip.Remove(); //if fails remove the ship
+                throw (new InvalidOperationException(e.Message));
 
             }
             finally

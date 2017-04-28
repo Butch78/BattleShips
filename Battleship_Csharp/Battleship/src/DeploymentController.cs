@@ -28,6 +28,7 @@ namespace Battleship
 
         private static Direction _currentDirection = Direction.UpDown;
         private static ShipName _selectedShip = ShipName.Tug;
+        private static Ship _selectedShipData;
 
         /// <summary>
         /// Handles user input for the Deployment phase of the game.
@@ -61,15 +62,15 @@ namespace Battleship
             if (SwinGame.MouseClicked(MouseButton.LeftButton))
             {
                 ShipName selected = default(ShipName);
+               
                 selected = GetShipMouseIsOver();
                 if (selected != ShipName.None)
                 {
                     _selectedShip = selected;
+                    _selectedShipData = new Ship(selected);
+                   
                 }
-                else
-                {
-                    DoDeployClick();
-                }
+             
 
                 if (GameController.HumanPlayer.ReadyToDeploy && UtilityFunctions.IsMouseInRectangle(PLAY_BUTTON_LEFT, TOP_BUTTONS_TOP, PLAY_BUTTON_WIDTH, TOP_BUTTONS_HEIGHT))
                 {
@@ -77,15 +78,22 @@ namespace Battleship
                 }
                 else if (UtilityFunctions.IsMouseInRectangle(UP_DOWN_BUTTON_LEFT, TOP_BUTTONS_TOP, DIR_BUTTONS_WIDTH, TOP_BUTTONS_HEIGHT))
                 {
-                    _currentDirection = Direction.LeftRight;
+                    _currentDirection = Direction.UpDown;
+                    DoUpClick();
                 }
                 else if (UtilityFunctions.IsMouseInRectangle(LEFT_RIGHT_BUTTON_LEFT, TOP_BUTTONS_TOP, DIR_BUTTONS_WIDTH, TOP_BUTTONS_HEIGHT))
                 {
                     _currentDirection = Direction.LeftRight;
+                    DoRightClick();
                 }
                 else if (UtilityFunctions.IsMouseInRectangle(RANDOM_BUTTON_LEFT, TOP_BUTTONS_TOP, RANDOM_BUTTON_WIDTH, TOP_BUTTONS_HEIGHT))
                 {
                     GameController.HumanPlayer.RandomizeDeployment();
+                }
+
+                else
+                {
+                    DoDeployClick();
                 }
             }
         }
@@ -100,6 +108,7 @@ namespace Battleship
         /// </remarks>
         private static void DoDeployClick()
         {
+            
             Point2D mouse = default(Point2D);
 
             mouse = SwinGame.MousePosition();
@@ -160,6 +169,7 @@ namespace Battleship
                     if (sn == _selectedShip)
                     {
                         SwinGame.DrawBitmap(GameResources.GameImage("SelectedShip"), SHIPS_LEFT, SHIPS_TOP + i * SHIPS_HEIGHT);
+                        
                         //    SwinGame.FillRectangle(Color.LightBlue, SHIPS_LEFT, SHIPS_TOP + i * SHIPS_HEIGHT, SHIPS_WIDTH, SHIPS_HEIGHT)
                         //Else
                         //    SwinGame.FillRectangle(Color.Gray, SHIPS_LEFT, SHIPS_TOP + i * SHIPS_HEIGHT, SHIPS_WIDTH, SHIPS_HEIGHT)
@@ -196,11 +206,101 @@ namespace Battleship
 
                 if (UtilityFunctions.IsMouseInRectangle(SHIPS_LEFT, SHIPS_TOP + i * SHIPS_HEIGHT, SHIPS_WIDTH, SHIPS_HEIGHT))
                 {
+                    Ship selectedShip = new Ship(sn);
+                    _selectedShipData = selectedShip;
                     return sn;
                 }
             }
 
             return ShipName.None;
+        }
+        /// <summary>
+        /// Move the ships left
+        /// </summary>
+        private static void DoLeftClick()
+        {
+
+            int row = _selectedShipData.Row;
+            int col = _selectedShipData.Column-1;
+
+
+            //Calculate the row / col clicked
+
+            if (row >= 0 & row < GameController.HumanPlayer.PlayerGrid.Height)
+            {
+                if (col >= 0 & col < GameController.HumanPlayer.PlayerGrid.Width)
+                {
+                    //if in the area try to deploy
+                    try
+                    {
+                        GameController.HumanPlayer.PlayerGrid.MoveShip(row, col, _selectedShip, _currentDirection);
+                    }
+                    catch (Exception ex)
+                    {
+                        Audio.PlaySoundEffect(GameResources.GameSound("Error"));
+                        UtilityFunctions.Message = ex.Message;
+                    }
+                }
+            }
+        }
+
+        private static void DoRightClick()
+        {
+
+            int row = GameController.HumanPlayer.PlayerGrid.Ships[_selectedShip].Row;
+            int col = GameController.HumanPlayer.PlayerGrid.Ships[_selectedShip].Column ;
+            GameController.HumanPlayer.PlayerGrid.MoveShip(row, col, _selectedShip, _currentDirection);
+            col = col + 1;
+
+            //Calculate the row / col clicked
+
+            if (row >= 0 & row < GameController.HumanPlayer.PlayerGrid.Height)
+            {
+                if (col >= 0 & col < GameController.HumanPlayer.PlayerGrid.Width)
+                {
+                    //if in the area try to deploy
+                    try
+                    {
+                        GameController.HumanPlayer.PlayerGrid.MoveShip(row, col, _selectedShip, _currentDirection);
+                    }
+                    catch (Exception ex)
+                    {
+                        Audio.PlaySoundEffect(GameResources.GameSound("Error"));
+                        UtilityFunctions.Message = ex.Message;
+                    }
+                }
+            }
+        }
+
+        private static void DoUpClick()
+        {
+           
+
+            int row = GameController.HumanPlayer.PlayerGrid.Ships[_selectedShip].Row;
+            int col = GameController.HumanPlayer.PlayerGrid.Ships[_selectedShip].Column;
+
+            GameController.HumanPlayer.PlayerGrid.MoveShip(row, col, _selectedShip, _currentDirection);
+            row = row + 1;
+
+
+            //Calculate the row / col clicked
+
+            if (row >= 0 & row < GameController.HumanPlayer.PlayerGrid.Height)
+            {
+                if (col >= 0 & col < GameController.HumanPlayer.PlayerGrid.Width)
+                {
+                    //if in the area try to deploy
+                    try
+                    {
+                        GameController.HumanPlayer.PlayerGrid.MoveShip(row, col, _selectedShip, _currentDirection);
+                    }
+                    catch (Exception ex)
+                    {
+                        Audio.PlaySoundEffect(GameResources.GameSound("Error"));
+                        UtilityFunctions.Message = ex.Message;
+                    }
+                }
+            }
         }
     }
 }
