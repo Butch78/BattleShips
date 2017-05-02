@@ -24,6 +24,10 @@ namespace Battleship
 
         private const int DIR_BUTTONS_WIDTH = 47;
 
+        private const int MUTE_BUTTONS_TOP = 20;
+        private const int MUTE_BUTTON_LEFT = 690;
+        private const int MUTE_BUTTON_WIDTH = 40;
+
         private const int TEXT_OFFSET = 5;
 
         private static Direction _currentDirection = Direction.UpDown;
@@ -190,7 +194,14 @@ namespace Battleship
 
             SwinGame.DrawBitmap(GameResources.GameImage("RandomButton"), RANDOM_BUTTON_LEFT, TOP_BUTTONS_TOP);
 
+            SwinGame.DrawBitmap(GameResources.GameImage("MuteButton"), MUTE_BUTTON_LEFT, TOP_BUTTONS_TOP);
+
+
            UtilityFunctions.DrawMessage();
+
+
+
+
         }
 
         /// <summary>
