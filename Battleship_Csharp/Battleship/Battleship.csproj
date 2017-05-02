@@ -111,12 +111,15 @@
     <Content Include="Resources\animations\startup.txt" />
     <Content Include="Resources\bundles\FileDialog.txt" />
     <Content Include="Resources\bundles\splash.txt" />
+    <Content Include="Resources\images\Actions-go-down-icon.png" />
+    <Content Include="Resources\images\Actions-go-next-icon.png" />
+    <Content Include="Resources\images\Actions-go-previous-icon.png" />
+    <Content Include="Resources\images\Actions-go-up-icon.png" />
     <Content Include="Resources\images\deploy.jpg" />
     <Content Include="Resources\images\deploy_button_hl.png" />
-    <Content Include="Resources\images\deploy_dir_button_horiz.png" />
-    <Content Include="Resources\images\deploy_dir_button_vert.png" />
     <Content Include="Resources\images\deploy_play_button.png" />
     <Content Include="Resources\images\deploy_randomize_button.png" />
+    <Content Include="Resources\images\deploy_right_button_horiz.png" />
     <Content Include="Resources\images\discover.jpg" />
     <Content Include="Resources\images\explosion.png" />
     <Content Include="Resources\images\fdFile.png" />

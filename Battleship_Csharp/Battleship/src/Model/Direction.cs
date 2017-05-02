@@ -11,11 +11,13 @@ namespace Battleship
         /// <summary>
         /// The ship is oriented left/right
         /// </summary>
-        LeftRight,
+        Left,
+        Right,
+        Up,
 
         /// <summary>
         /// The ship is oriented up/down
         /// </summary>
-        UpDown
+        Down
     }
 }

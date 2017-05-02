@@ -127,9 +127,11 @@ namespace Battleship
         /// <param name="direction">the direction the ship is going</param>
         public void MoveShip(int row, int col, ShipName ship, Direction direction)
         {
-            Ship newShip = _Ships[ship];
-            newShip.Remove();
-            AddShip(row, col, direction, newShip);
+           
+                Ship newShip = _Ships[ship];
+                newShip.Remove();
+                AddShip(row, col, direction, newShip);
+          
         }
 
         /// <summary>
@@ -149,12 +151,12 @@ namespace Battleship
                 int dRow = 0;
                 int dCol = 0;
 
-                if (direction == Direction.LeftRight)
+                if (direction == Direction.Left|| direction == Direction.Right)
                 {
                     dRow = 0;
                     dCol = 1;
                 }
-                else
+                else if(direction == Direction.Up || direction == Direction.Down)
                 {
                     dRow = 1;
                     dCol = 0;
@@ -179,8 +181,7 @@ namespace Battleship
             }
             catch (Exception e)
             {
-               // newShip.Remove(); //if fails remove the ship
-                throw (new InvalidOperationException(e.Message));
+              throw (new InvalidOperationException(e.Message));
 
             }
             finally

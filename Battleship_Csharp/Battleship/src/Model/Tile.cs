@@ -77,6 +77,7 @@ namespace Battleship
                 }
                 else
                 {
+                    
                     throw (new InvalidOperationException("There is already a ship at [" + System.Convert.ToString(Row) + ", " + System.Convert.ToString(Column) + "]"));
                 }
             }
