@@ -43,6 +43,7 @@ namespace Battleship
             NewImage("RandomButton", "deploy_randomize_button.png");
             NewImage("MuteButton", "Mute_Button.png");
             NewImage("SoundButton", "Sound_Button.png");
+			NewImage("MenuButton", "hb_button2.png");
 
             //Ships
             int i = 0;

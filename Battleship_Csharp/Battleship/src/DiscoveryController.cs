@@ -11,8 +11,13 @@ namespace Battleship
 {
     sealed class DiscoveryController
     {
+		private const int MENU_TOP = 0;
+		private const int MENU_LEFT = 0;
+		private const int MENU_HEIGHT = 62;
+		private const int MENU_WIDTH = 55;
+        
 
-        private const int MUTE_BUTTON_TOP = 10;
+		private const int MUTE_BUTTON_TOP = 10;
         private const int MUTE_BUTTON_LEFT = 720;
         private const int MUTE_BUTTON_WIDTH = 40;
         private const int MUTW_BUTTON_HEIGHT = 30;
@@ -32,6 +37,11 @@ namespace Battleship
             {
                GameController.AddNewState(GameState.ViewingGameMenu);
             }
+
+			else if (SwinGame.MouseClicked(MouseButton.LeftButton) & UtilityFunctions.IsMouseInRectangle(MENU_LEFT, MENU_TOP, MENU_WIDTH, MENU_WIDTH))
+			{
+				GameController.AddNewState(GameState.ViewingGameMenu);
+			}
 
             if (SwinGame.MouseClicked(MouseButton.LeftButton))
             {
@@ -103,8 +113,9 @@ namespace Battleship
             SwinGame.DrawText(GameController.HumanPlayer.Shots.ToString(), Color.White, GameResources.GameFont("Menu"), SCORES_LEFT, SHOTS_TOP);
             SwinGame.DrawText(GameController.HumanPlayer.Hits.ToString(), Color.White, GameResources.GameFont("Menu"), SCORES_LEFT, HITS_TOP);
             SwinGame.DrawText(GameController.HumanPlayer.Missed.ToString(), Color.White, GameResources.GameFont("Menu"), SCORES_LEFT, SPLASH_TOP);
-
-            if (Sound == true)
+			SwinGame.DrawBitmap(GameResources.GameImage("MenuButton"), MENU_LEFT, MENU_TOP);
+            
+			if (Sound == true)
             {
                 SwinGame.DrawBitmap(GameResources.GameImage("SoundButton"), MUTE_BUTTON_LEFT, MUTE_BUTTON_TOP);
             }
