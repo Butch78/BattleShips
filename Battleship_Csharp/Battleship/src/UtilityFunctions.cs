@@ -136,9 +136,6 @@ namespace Battleship
 
 					switch (grid.Item(row, col))
 					{
-						//	case TileView.Ship:
-						//		draw = false;
-						//		break;
 						//If small Then fillColor = _SMALL_SHIP Else fillColor = _LARGE_SHIP
 						case TileView.Miss:
 							if (small)
@@ -162,44 +159,6 @@ namespace Battleship
 					}
 
 
-					/*if (grid.Item(row, col) == TileView.Ship)
-					 {
-						 draw = false;
-						 //If small Then fillColor = _SMALL_SHIP Else fillColor = _LARGE_SHIP
-					 }
-					 else if (grid.Item(row, col) == TileView.Miss)
-					 {
-						 if (small)
-						 {
-							 fillColor = SMALL_MISS;
-						 }
-						 else
-						 {
-							 fillColor = LARGE_MISS;
-						 }
-					 }
-					 else if (grid.Item(row, col) == TileView.Hit)
-					 {
-						 if (small)
-						 {
-							 fillColor = SMALL_HIT;
-						 }
-						 else
-						 {
-							 fillColor = LARGE_HIT;
-						 }
-					 }
-					 else if ((grid.Item(row, col) == TileView.Sea) || (grid.Item(row, col) == TileView.Ship))
-					 {
-						 if (small)
-						 {
-							 fillColor = SMALL_SEA;
-						 }
-						 else
-						 {
-							 draw = false;
-						 }
-					 }*/
 
 					if (draw)
 					{
@@ -310,22 +269,6 @@ namespace Battleship
 					break;
 			}
 
-			/*if ((((GameController.CurrentState == GameState.ViewingMainMenu) || (GameController.CurrentState == GameState.ViewingGameMenu)) || (GameController.CurrentState == GameState.AlteringSettings)) || (GameController.CurrentState == GameState.ViewingHighScores))
-            {
-                SwinGame.DrawBitmap(GameResources.GameImage("Menu"), 0, 0);
-            }
-            else if ((GameController.CurrentState == GameState.Discovering) || (GameController.CurrentState == GameState.EndingGame))
-            {
-                SwinGame.DrawBitmap(GameResources.GameImage("Discovery"), 0, 0);
-            }
-            else if (GameController.CurrentState == GameState.Deploying)
-            {
-                SwinGame.DrawBitmap(GameResources.GameImage("Deploy"), 0, 0);
-            }
-            else
-            {
-                SwinGame.ClearScreen();
-            }*/
 
 			SwinGame.DrawFramerate(675, 585, GameResources.GameFont("CourierSmall"));
 		}

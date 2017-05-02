@@ -205,6 +205,7 @@ namespace Battleship
                 else
                 {
                     Audio.PlaySoundEffect(GameResources.GameSound("Winner"));
+
                 }
             }
             else if (result.Value == ResultOfAttack.Hit)
