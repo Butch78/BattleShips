@@ -51,7 +51,7 @@ namespace Battleship
         private const int GAME_MENU_QUIT_BUTTON = 2;
 
 
-        private const int MUTE_BUTTONS_TOP = 20;
+        private const int MUTE_BUTTONS_TOP = 32;
         private const int MUTE_BUTTON_LEFT = 690;
         private const int MUTE_BUTTON_WIDTH = 40;
        
