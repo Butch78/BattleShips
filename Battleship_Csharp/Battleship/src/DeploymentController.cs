@@ -26,10 +26,17 @@ namespace Battleship
 
         private const int DIR_BUTTONS_WIDTH = 40;
 
+        private const int MUTE_BUTTON_TOP = 10;
+        private const int MUTE_BUTTON_LEFT = 720;
+        private const int MUTE_BUTTON_WIDTH = 40;
+        private const int MUTW_BUTTON_HEIGHT = 30;
+
+
         private const int TEXT_OFFSET = 5;
 
         private static Direction _currentDirection = Direction.Up;
         private static ShipName _selectedShip = ShipName.Tug;
+        public static bool Sound = true;
 
 
         /// <summary>
@@ -42,6 +49,8 @@ namespace Battleship
         /// </remarks>
         public static void HandleDeploymentInput()
         {
+             
+
             if (SwinGame.KeyTyped(KeyCode.vk_ESCAPE))
             {
                 GameController.AddNewState(GameState.ViewingGameMenu);
@@ -79,7 +88,7 @@ namespace Battleship
                     _selectedShip = selected;
                                 
                 }
-             
+
 
                 if (GameController.HumanPlayer.ReadyToDeploy && UtilityFunctions.IsMouseInRectangle(PLAY_BUTTON_LEFT, TOP_BUTTONS_TOP, PLAY_BUTTON_WIDTH, TOP_BUTTONS_HEIGHT))
                 {
@@ -109,7 +118,18 @@ namespace Battleship
                 {
                     GameController.HumanPlayer.RandomizeDeployment();
                 }
-
+                else if (UtilityFunctions.IsMouseInRectangle(MUTE_BUTTON_LEFT, MUTE_BUTTON_TOP, MUTE_BUTTON_WIDTH, MUTW_BUTTON_HEIGHT) && (Sound == true))
+                {
+                    SwinGame.StopMusic();
+                    SwinGame.DrawBitmap(GameResources.GameImage("MuteButton"), MUTE_BUTTON_LEFT, MUTE_BUTTON_TOP);
+                    Sound = false;
+                }
+                else if (UtilityFunctions.IsMouseInRectangle(MUTE_BUTTON_LEFT, MUTE_BUTTON_TOP, MUTE_BUTTON_WIDTH, MUTW_BUTTON_HEIGHT) && (Sound == false))
+                {
+                    SwinGame.PlayMusic(GameResources.GameMusic("Background"));
+                    SwinGame.DrawBitmap(GameResources.GameImage("SoundButton"), MUTE_BUTTON_LEFT, MUTE_BUTTON_TOP);
+                    Sound = true;
+                }
                 else
                 {
                     DoDeployClick();
@@ -231,7 +251,23 @@ namespace Battleship
 
             SwinGame.DrawBitmap(GameResources.GameImage("RandomButton"), RANDOM_BUTTON_LEFT, TOP_BUTTONS_TOP);
 
+
+            if(Sound == true)
+            {
+                SwinGame.DrawBitmap(GameResources.GameImage("SoundButton"), MUTE_BUTTON_LEFT, MUTE_BUTTON_TOP);
+            }
+            else
+            {
+                SwinGame.DrawBitmap(GameResources.GameImage("MuteButton"), MUTE_BUTTON_LEFT, MUTE_BUTTON_TOP);
+            }
+            
+
+
            UtilityFunctions.DrawMessage();
+
+
+
+
         }
 
         /// <summary>

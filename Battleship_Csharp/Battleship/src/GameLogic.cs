@@ -20,7 +20,7 @@ namespace Battleship
            GameResources.LoadResources();
 
             SwinGame.PlayMusic(GameResources.GameMusic("Background"));
-
+            
             //Game Loop
             do
             {
