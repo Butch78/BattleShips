@@ -232,13 +232,13 @@ namespace Battleship
 				rowTop = top + (cellGap + cellHeight) * s.Row + SHIP_GAP;
 				colLeft = left + (cellGap + cellWidth) * s.Column + SHIP_GAP;
 
-				if (s.Direction == Direction.LeftRight)
+				if (s.Direction == Direction.Left|| s.Direction == Direction.Right)
 				{
 					shipName = "ShipLR" + s.Size;
 					shipHeight = cellHeight - (SHIP_GAP * 2);
 					shipWidth = (cellWidth + cellGap) * s.Size - (SHIP_GAP * 2) - cellGap;
 				}
-				else
+				else if(s.Direction == Direction.Up || s.Direction == Direction.Down)
 				{
 					//Up down
 					shipName = "ShipUD" + s.Size;

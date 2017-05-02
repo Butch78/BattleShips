@@ -26,9 +26,18 @@ namespace Battleship
             NewImage("Discovery", "discover.jpg");
             NewImage("Deploy", "deploy.jpg");
 
-            //Deployment
-            NewImage("LeftRightButton", "deploy_dir_button_horiz.png");
-            NewImage("UpDownButton", "deploy_dir_button_vert.png");
+            //Deployment            
+            //NewImage("LeftButton", "deploy_left_button_horiz.png");
+            //NewImage("RightButton", "deploy_right_button_horiz.png");
+            //NewImage("UpButton", "deploy_up_button_vert.png");
+            //NewImage("DownButton", "deploy_down_button_vert.png");
+
+
+            NewImage("DownButton", "Actions-go-down-icon.png");
+            NewImage("RightButton", "Actions-go-next-icon.png");
+            NewImage("UpButton", "Actions-go-up-icon.png");
+            NewImage("LeftButton", "Actions-go-previous-icon.png");
+
             NewImage("SelectedShip", "deploy_button_hl.png");
             NewImage("PlayButton", "deploy_play_button.png");
             NewImage("RandomButton", "deploy_randomize_button.png");

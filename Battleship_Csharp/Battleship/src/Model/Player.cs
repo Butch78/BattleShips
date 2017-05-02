@@ -279,11 +279,11 @@ namespace Battleship
 
                     if (dir == 0)
                     {
-                        heading = Direction.UpDown;
+                        heading = Direction.Up;
                     }
                     else
                     {
-                        heading = Direction.LeftRight;
+                        heading = Direction.Left;
                     }
 
                     //try to place ship, if position unplaceable, generate new coordinates

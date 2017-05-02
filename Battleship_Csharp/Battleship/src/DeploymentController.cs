@@ -11,24 +11,26 @@ namespace Battleship
         private const int SHIPS_WIDTH = 300;
 
         private const int TOP_BUTTONS_TOP = 72;
-        private const int TOP_BUTTONS_HEIGHT = 46;
+        private const int TOP_BUTTONS_HEIGHT = 40;
 
         private const int PLAY_BUTTON_LEFT = 693;
         private const int PLAY_BUTTON_WIDTH = 80;
 
-        private const int UP_DOWN_BUTTON_LEFT = 410;
-        private const int LEFT_RIGHT_BUTTON_LEFT = 350;
+        private const int UP_BUTTON_LEFT = 430;
+        private const int LEFT_BUTTON_LEFT = 350;
+        private const int DOWN_BUTTON_LEFT = 470;
+        private const int RIGHT_BUTTON_LEFT = 390;
 
-        private const int RANDOM_BUTTON_LEFT = 547;
+        private const int RANDOM_BUTTON_LEFT = 567;
         private const int RANDOM_BUTTON_WIDTH = 51;
 
-        private const int DIR_BUTTONS_WIDTH = 47;
+        private const int DIR_BUTTONS_WIDTH = 40;
 
         private const int TEXT_OFFSET = 5;
 
-        private static Direction _currentDirection = Direction.UpDown;
+        private static Direction _currentDirection = Direction.Up;
         private static ShipName _selectedShip = ShipName.Tug;
-        private static Ship _selectedShipData;
+
 
         /// <summary>
         /// Handles user input for the Deployment phase of the game.
@@ -45,13 +47,21 @@ namespace Battleship
                 GameController.AddNewState(GameState.ViewingGameMenu);
             }
 
-            if (SwinGame.KeyTyped(KeyCode.vk_UP) || SwinGame.KeyTyped(KeyCode.vk_DOWN))
+            if (SwinGame.KeyTyped(KeyCode.vk_UP) )
             {
-                _currentDirection = Direction.UpDown;
+                _currentDirection = Direction.Up;
             }
-            if (SwinGame.KeyTyped(KeyCode.vk_LEFT) || SwinGame.KeyTyped(KeyCode.vk_RIGHT))
+            if(SwinGame.KeyTyped(KeyCode.vk_DOWN))
             {
-                _currentDirection = Direction.LeftRight;
+                _currentDirection = Direction.Down;
+            }
+            if (SwinGame.KeyTyped(KeyCode.vk_LEFT))
+            {
+                _currentDirection = Direction.Left;
+            }
+            if (SwinGame.KeyTyped(KeyCode.vk_RIGHT))
+            {
+                _currentDirection = Direction.Right;
             }
 
             if (SwinGame.KeyTyped(KeyCode.vk_r))
@@ -67,8 +77,7 @@ namespace Battleship
                 if (selected != ShipName.None)
                 {
                     _selectedShip = selected;
-                    _selectedShipData = new Ship(selected);
-                   
+                                
                 }
              
 
@@ -76,14 +85,24 @@ namespace Battleship
                 {
                     GameController.EndDeployment();
                 }
-                else if (UtilityFunctions.IsMouseInRectangle(UP_DOWN_BUTTON_LEFT, TOP_BUTTONS_TOP, DIR_BUTTONS_WIDTH, TOP_BUTTONS_HEIGHT))
+                else if (UtilityFunctions.IsMouseInRectangle(UP_BUTTON_LEFT, TOP_BUTTONS_TOP, DIR_BUTTONS_WIDTH, TOP_BUTTONS_HEIGHT))
                 {
-                    _currentDirection = Direction.UpDown;
+                    _currentDirection = Direction.Up;
                     DoUpClick();
                 }
-                else if (UtilityFunctions.IsMouseInRectangle(LEFT_RIGHT_BUTTON_LEFT, TOP_BUTTONS_TOP, DIR_BUTTONS_WIDTH, TOP_BUTTONS_HEIGHT))
+                else if (UtilityFunctions.IsMouseInRectangle(DOWN_BUTTON_LEFT, TOP_BUTTONS_TOP, DIR_BUTTONS_WIDTH, TOP_BUTTONS_HEIGHT))
                 {
-                    _currentDirection = Direction.LeftRight;
+                    _currentDirection = Direction.Down;
+                    DoDownClick();
+                }
+                else if (UtilityFunctions.IsMouseInRectangle(LEFT_BUTTON_LEFT, TOP_BUTTONS_TOP, DIR_BUTTONS_WIDTH, TOP_BUTTONS_HEIGHT))
+                {
+                    _currentDirection = Direction.Left;
+                    DoLeftClick();
+                }
+                else if (UtilityFunctions.IsMouseInRectangle(RIGHT_BUTTON_LEFT, TOP_BUTTONS_TOP, DIR_BUTTONS_WIDTH, TOP_BUTTONS_HEIGHT))
+                {
+                    _currentDirection = Direction.Right;
                     DoRightClick();
                 }
                 else if (UtilityFunctions.IsMouseInRectangle(RANDOM_BUTTON_LEFT, TOP_BUTTONS_TOP, RANDOM_BUTTON_WIDTH, TOP_BUTTONS_HEIGHT))
@@ -144,17 +163,39 @@ namespace Battleship
         public static void DrawDeployment()
         {
            UtilityFunctions.DrawField(GameController.HumanPlayer.PlayerGrid, GameController.HumanPlayer, true);
-
+            SwinGame.DrawBitmap(GameResources.GameImage("LeftButton"), LEFT_BUTTON_LEFT, TOP_BUTTONS_TOP);
+            SwinGame.DrawBitmap(GameResources.GameImage("RightButton"), RIGHT_BUTTON_LEFT, TOP_BUTTONS_TOP);
+            SwinGame.DrawBitmap(GameResources.GameImage("UpButton"), UP_BUTTON_LEFT, TOP_BUTTONS_TOP);
+            SwinGame.DrawBitmap(GameResources.GameImage("DownButton"), DOWN_BUTTON_LEFT, TOP_BUTTONS_TOP);
             //Draw the Left/Right and Up/Down buttons
-            if (_currentDirection == Direction.LeftRight)
+            if (_currentDirection == Direction.Left)
             {
-                SwinGame.DrawBitmap(GameResources.GameImage("LeftRightButton"), LEFT_RIGHT_BUTTON_LEFT, TOP_BUTTONS_TOP);
+                SwinGame.DrawRectangleOnScreen(Color.Yellow, LEFT_BUTTON_LEFT, TOP_BUTTONS_TOP, DIR_BUTTONS_WIDTH, TOP_BUTTONS_HEIGHT);
+                //SwinGame.DrawBitmap(GameResources.GameImage("LeftButton"), LEFT_BUTTON_LEFT, TOP_BUTTONS_TOP);
                 //SwinGame.DrawText("U/D", Color.Gray, GameResources.GameFont("Menu"), UP_DOWN_BUTTON_LEFT, TOP_BUTTONS_TOP)
                 //SwinGame.DrawText("L/R", Color.White, GameResources.GameFont("Menu"), LEFT_RIGHT_BUTTON_LEFT, TOP_BUTTONS_TOP)
             }
-            else
+            else if (_currentDirection == Direction.Right)
             {
-                SwinGame.DrawBitmap(GameResources.GameImage("UpDownButton"), LEFT_RIGHT_BUTTON_LEFT, TOP_BUTTONS_TOP);
+                SwinGame.DrawRectangleOnScreen(Color.Yellow, RIGHT_BUTTON_LEFT, TOP_BUTTONS_TOP, DIR_BUTTONS_WIDTH, TOP_BUTTONS_HEIGHT);
+                //SwinGame.DrawBitmap(GameResources.GameImage("RightButton"), LEFT_BUTTON_LEFT, TOP_BUTTONS_TOP);
+
+                //SwinGame.DrawText("U/D", Color.Gray, GameResources.GameFont("Menu"), UP_DOWN_BUTTON_LEFT, TOP_BUTTONS_TOP)
+                //SwinGame.DrawText("L/R", Color.White, GameResources.GameFont("Menu"), LEFT_RIGHT_BUTTON_LEFT, TOP_BUTTONS_TOP)
+            }
+            else if(_currentDirection == Direction.Up)
+            {
+                SwinGame.DrawRectangleOnScreen(Color.Yellow, UP_BUTTON_LEFT, TOP_BUTTONS_TOP, DIR_BUTTONS_WIDTH, TOP_BUTTONS_HEIGHT);
+                // SwinGame.DrawBitmap(GameResources.GameImage("UpButton"), LEFT_BUTTON_LEFT, TOP_BUTTONS_TOP);
+
+                //SwinGame.DrawText("U/D", Color.White, GameResources.GameFont("Menu"), UP_DOWN_BUTTON_LEFT, TOP_BUTTONS_TOP)
+                //SwinGame.DrawText("L/R", Color.Gray, GameResources.GameFont("Menu"), LEFT_RIGHT_BUTTON_LEFT, TOP_BUTTONS_TOP)
+            }
+             else if(_currentDirection==Direction.Down)
+            {
+                SwinGame.DrawRectangleOnScreen(Color.Yellow, DOWN_BUTTON_LEFT, TOP_BUTTONS_TOP, DIR_BUTTONS_WIDTH, TOP_BUTTONS_HEIGHT);
+
+                // SwinGame.DrawBitmap(GameResources.GameImage("DownButton"), LEFT_BUTTON_LEFT, TOP_BUTTONS_TOP);
                 //SwinGame.DrawText("U/D", Color.White, GameResources.GameFont("Menu"), UP_DOWN_BUTTON_LEFT, TOP_BUTTONS_TOP)
                 //SwinGame.DrawText("L/R", Color.Gray, GameResources.GameFont("Menu"), LEFT_RIGHT_BUTTON_LEFT, TOP_BUTTONS_TOP)
             }
@@ -207,7 +248,6 @@ namespace Battleship
                 if (UtilityFunctions.IsMouseInRectangle(SHIPS_LEFT, SHIPS_TOP + i * SHIPS_HEIGHT, SHIPS_WIDTH, SHIPS_HEIGHT))
                 {
                     Ship selectedShip = new Ship(sn);
-                    _selectedShipData = selectedShip;
                     return sn;
                 }
             }
@@ -219,9 +259,10 @@ namespace Battleship
         /// </summary>
         private static void DoLeftClick()
         {
-
-            int row = _selectedShipData.Row;
-            int col = _selectedShipData.Column-1;
+            int row = GameController.HumanPlayer.PlayerGrid.Ships[_selectedShip].Row;
+            int col = GameController.HumanPlayer.PlayerGrid.Ships[_selectedShip].Column;
+            GameController.HumanPlayer.PlayerGrid.MoveShip(row, col, _selectedShip, _currentDirection);
+            col = col - 1;
 
 
             //Calculate the row / col clicked
@@ -237,10 +278,18 @@ namespace Battleship
                     }
                     catch (Exception ex)
                     {
+                        GameController.HumanPlayer.PlayerGrid.MoveShip(row, col+1, _selectedShip, _currentDirection);
                         Audio.PlaySoundEffect(GameResources.GameSound("Error"));
                         UtilityFunctions.Message = ex.Message;
                     }
                 }
+            }
+
+            else
+            {
+                Audio.PlaySoundEffect(GameResources.GameSound("Error"));
+                UtilityFunctions.Message = "Ship can't fit on the board if further moved";
+
             }
         }
 
@@ -265,16 +314,65 @@ namespace Battleship
                     }
                     catch (Exception ex)
                     {
+                        GameController.HumanPlayer.PlayerGrid.MoveShip(row, col-1, _selectedShip, _currentDirection);
                         Audio.PlaySoundEffect(GameResources.GameSound("Error"));
                         UtilityFunctions.Message = ex.Message;
+
                     }
                 }
+            }
+
+            else
+            {
+                Audio.PlaySoundEffect(GameResources.GameSound("Error"));
+                UtilityFunctions.Message = "Ship can't fit on the board if further moved";
+
             }
         }
 
         private static void DoUpClick()
         {
            
+
+            int row = GameController.HumanPlayer.PlayerGrid.Ships[_selectedShip].Row;
+            int col = GameController.HumanPlayer.PlayerGrid.Ships[_selectedShip].Column;
+
+            GameController.HumanPlayer.PlayerGrid.MoveShip(row, col, _selectedShip, _currentDirection);
+            row = row - 1;
+
+
+            //Calculate the row / col clicked
+
+            if (row >= 0 & row < GameController.HumanPlayer.PlayerGrid.Height)
+            {
+                if (col >= 0 & col < GameController.HumanPlayer.PlayerGrid.Width)
+                {
+                    //if in the area try to deploy
+                    try
+                    {
+                        GameController.HumanPlayer.PlayerGrid.MoveShip(row, col, _selectedShip, _currentDirection);
+                    }
+                    catch (Exception ex)
+                    {
+                        GameController.HumanPlayer.PlayerGrid.MoveShip(row+1, col, _selectedShip, _currentDirection);
+                        Audio.PlaySoundEffect(GameResources.GameSound("Error"));
+                        UtilityFunctions.Message = ex.Message;
+                    }
+                }
+            }
+
+            else
+            {
+                Audio.PlaySoundEffect(GameResources.GameSound("Error"));
+                UtilityFunctions.Message = "Ship can't fit on the board if further moved";
+              
+
+            }
+        }
+
+        private static void DoDownClick()
+        {
+
 
             int row = GameController.HumanPlayer.PlayerGrid.Ships[_selectedShip].Row;
             int col = GameController.HumanPlayer.PlayerGrid.Ships[_selectedShip].Column;
@@ -296,11 +394,20 @@ namespace Battleship
                     }
                     catch (Exception ex)
                     {
+                        GameController.HumanPlayer.PlayerGrid.MoveShip(row-1, col, _selectedShip, _currentDirection);
                         Audio.PlaySoundEffect(GameResources.GameSound("Error"));
                         UtilityFunctions.Message = ex.Message;
                     }
                 }
             }
+
+            else
+            {
+                Audio.PlaySoundEffect(GameResources.GameSound("Error"));
+                UtilityFunctions.Message = "Ship can't fit on the board if further moved";
+
+            }
         }
     }
 }
+   
