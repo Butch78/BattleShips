@@ -39,19 +39,22 @@ namespace Battleship
             }
 
 
-
-           if (UtilityFunctions.IsMouseInRectangle(MUTE_BUTTON_LEFT, MUTE_BUTTON_TOP, MUTE_BUTTON_WIDTH, MUTW_BUTTON_HEIGHT) && (Sound == true))
+            if (SwinGame.MouseClicked(MouseButton.LeftButton))
             {
-                SwinGame.StopMusic();
-                SwinGame.DrawBitmap(GameResources.GameImage("MuteButton"), MUTE_BUTTON_LEFT, MUTE_BUTTON_TOP);
-                Sound = false;
+                if (UtilityFunctions.IsMouseInRectangle(MUTE_BUTTON_LEFT, MUTE_BUTTON_TOP, MUTE_BUTTON_WIDTH, MUTW_BUTTON_HEIGHT) && (Sound == true))
+                {
+                    SwinGame.StopMusic();
+                    SwinGame.DrawBitmap(GameResources.GameImage("MuteButton"), MUTE_BUTTON_LEFT, MUTE_BUTTON_TOP);
+                    Sound = false;
+                }
+                else if (UtilityFunctions.IsMouseInRectangle(MUTE_BUTTON_LEFT, MUTE_BUTTON_TOP, MUTE_BUTTON_WIDTH, MUTW_BUTTON_HEIGHT) && (Sound == false))
+                {
+                    SwinGame.PlayMusic(GameResources.GameMusic("Background"));
+                    SwinGame.DrawBitmap(GameResources.GameImage("SoundButton"), MUTE_BUTTON_LEFT, MUTE_BUTTON_TOP);
+                    Sound = true;
+                }
             }
-            else if (UtilityFunctions.IsMouseInRectangle(MUTE_BUTTON_LEFT, MUTE_BUTTON_TOP, MUTE_BUTTON_WIDTH, MUTW_BUTTON_HEIGHT) && (Sound == false))
-            {
-                SwinGame.PlayMusic(GameResources.GameMusic("Background"));
-                SwinGame.DrawBitmap(GameResources.GameImage("SoundButton"), MUTE_BUTTON_LEFT, MUTE_BUTTON_TOP);
-                Sound = true;
-            }
+            
         }
 
         /// <summary>
